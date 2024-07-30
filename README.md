@@ -90,6 +90,8 @@ INSERT INTO Programadores (id_programador, primer_nombre, primer_apellido, edad,
 INSERT INTO Proyectos (id_proyecto, nombre, lenguaje_requerido, usuario, fecha_actualizacion) VALUES (seq_proyecto.NEXTVAL, 'Sistema de Gestión Escolar', (SELECT id_lenguaje FROM Lenguajes WHERE nombre = 'Java'), USER, SYSDATE);
 
 
+## 4 Asignación Aleatoria de Lenguajes a Programadores
+### Tabla programadorLenguaje
 
 
 
