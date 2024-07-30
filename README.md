@@ -1,6 +1,6 @@
 # 1- CONSTRUCCION DEL MODELO DE DATOS:
-Tablas:
-LENGUAJES
+## Tablas:
+### LENGUAJES
 CREATE TABLE Lenguajes (
     id_lenguaje NUMBER PRIMARY KEY,
     nombre VARCHAR2(100) NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE Lenguajes (
     fecha_actualizacion DATE
 );
 
-PROGRAMADORES
+### PROGRAMADORES
 
 CREATE TABLE Programadores (
     id_programador NUMBER PRIMARY KEY,
@@ -25,7 +25,7 @@ CREATE TABLE Programadores (
 );
 
 
-PROYECTOS
+### PROYECTOS
 CREATE TABLE Proyectos (
     id_proyecto NUMBER PRIMARY KEY,
     nombre VARCHAR2(100) NOT NULL,
@@ -40,13 +40,13 @@ CREATE TABLE Proyectos (
     CONSTRAINT fk_lenguaje FOREIGN KEY (lenguaje_requerido) REFERENCES Lenguajes(id_lenguaje)
 );
 
-2- SECUENCIAS Y TRIGGERS USADOS:
-SECUENCIAS 
+# 2- SECUENCIAS Y TRIGGERS USADOS:
+## SECUENCIAS 
 CREATE SEQUENCE seq_lenguaje START WITH 1;
 CREATE SEQUENCE seq_programador START WITH 1;
 CREATE SEQUENCE seq_proyecto START WITH 1;
 
-TRIGGERS
+## TRIGGERS
 
 CREATE OR REPLACE TRIGGER trg_lenguaje
 BEFORE INSERT ON Lenguajes
@@ -75,17 +75,17 @@ BEGIN
     :NEW.usuario := USER;
 END;
 
-3-INSERTAR REGISTROS
+# 3-INSERTAR REGISTROS
 
-TABLA LENGUAJES:
+## TABLA LENGUAJES:
 INSERT INTO Lenguajes (id_lenguaje, nombre, estado, usuario, fecha_actualizacion) VALUES (seq_lenguaje.NEXTVAL, 'Java', 'A', USER, SYSDATE);
 
 
-TABLA PROGRAMADORES
+## TABLA PROGRAMADORES
 
 INSERT INTO Programadores (id_programador, primer_nombre, primer_apellido, edad, anos_experiencia, sexo, usuario, fecha_actualizacion) VALUES (seq_programador.NEXTVAL, 'Juan', 'Pérez', 30, 5, 'M', USER, SYSDATE);
 
-TABLA PROYECTOS
+## TABLA PROYECTOS
 
 INSERT INTO Proyectos (id_proyecto, nombre, lenguaje_requerido, usuario, fecha_actualizacion) VALUES (seq_proyecto.NEXTVAL, 'Sistema de Gestión Escolar', (SELECT id_lenguaje FROM Lenguajes WHERE nombre = 'Java'), USER, SYSDATE);
 
